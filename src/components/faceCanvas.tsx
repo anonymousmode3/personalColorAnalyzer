@@ -1,7 +1,5 @@
 import { useEffect, useRef } from "react";
 import * as faceapi from "face-api.js";
-import { analyzeSkinColor } from "../lib/analysis/colorAnalyzer";
-import { detectSeason } from "../lib/analysis/seasonClassifier";
 
 type Props = {
   image: HTMLImageElement;
@@ -9,36 +7,48 @@ type Props = {
     { detection: faceapi.FaceDetection },
     faceapi.FaceLandmarks68
   >;
-  onFaceReady?: (canvas: HTMLCanvasElement) => void;
+  onSkinColor?: (rgb: { r: number; g: number; b: number }) => void;
 };
 
-export default function FaceCanvas({ image, detection, onFaceReady }: Props) {
+export default function FaceCanvas({
+  image,
+  detection,
+  onSkinColor,
+}: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    if (!canvasRef.current) return;
+    const canvas = canvasRef.current!;
+    const ctx = canvas.getContext("2d")!;
 
-    const { x, y, width, height } = detection.detection.box;
-    const canvas = canvasRef.current;
+    canvas.width = image.width;
+    canvas.height = image.height;
 
-    canvas.width = width;
-    canvas.height = height;
+    ctx.drawImage(image, 0, 0);
 
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    // landmarks
+    const landmarks = detection.landmarks.positions;
 
-    ctx.clearRect(0, 0, width, height);
+    // 👉 left cheek approx (points 2–4)
+    const cheekPoints = landmarks.slice(2, 5);
 
-    ctx.drawImage(image, x, y, width, height, 0, 0, width, height);
+    const x = Math.round(
+      cheekPoints.reduce((s, p) => s + p.x, 0) / cheekPoints.length
+    );
+    const y = Math.round(
+      cheekPoints.reduce((s, p) => s + p.y, 0) / cheekPoints.length
+    );
 
-    onFaceReady?.(canvas);
-    const color = analyzeSkinColor(canvas);
-    if (color) {
-      const season = detectSeason(color ?? null);
+    const data = ctx.getImageData(x, y, 1, 1).data;
 
-      console.log("season----->", season);
-    }
-  }, [image, detection, onFaceReady]);
+    const rgb = {
+      r: data[0],
+      g: data[1],
+      b: data[2],
+    };
 
-  return <canvas ref={canvasRef} className="border rounded" />;
+    onSkinColor?.(rgb);
+  }, [image, detection]);
+
+  return <canvas ref={canvasRef} className="max-w-full rounded" />;
 }

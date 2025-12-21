@@ -10,8 +10,18 @@ export async function detectFace(
   | null
 > {
   const result = await faceapi
-    .detectSingleFace(img, new faceapi.TinyFaceDetectorOptions())
-    .withFaceLandmarks(true); // 👈 IMPORTANT
+    .detectSingleFace(
+      img,
+      new faceapi.TinyFaceDetectorOptions({
+        inputSize: 512,
+        scoreThreshold: 0.5,
+      })
+    )
+    .withFaceLandmarks(true);
 
-  return result ?? null;
+  if (!result) {
+    return null; // 👈 NO FACE
+  }
+
+  return result;
 }

@@ -1,10 +1,23 @@
 import { isSkinPixel } from "./skinFilter";
 
-export type RGB = {
-  r: number;
-  g: number;
-  b: number;
-};
+export type RGB = { r: number; g: number; b: number };
+
+export function hexToRgb(hex: string): RGB {
+  const value = hex.replace("#", "");
+  return {
+    r: parseInt(value.slice(0, 2), 16),
+    g: parseInt(value.slice(2, 4), 16),
+    b: parseInt(value.slice(4, 6), 16),
+  };
+}
+
+export function colorDistance(a: RGB, b: RGB) {
+  return Math.sqrt(
+    (a.r - b.r) ** 2 +
+    (a.g - b.g) ** 2 +
+    (a.b - b.b) ** 2
+  );
+}
 
 export function analyzeSkinColor(canvas: HTMLCanvasElement): RGB | null {
   const ctx = canvas.getContext("2d");
@@ -37,3 +50,4 @@ export function analyzeSkinColor(canvas: HTMLCanvasElement): RGB | null {
     b: Math.round(b / count),
   };
 }
+

@@ -1,5 +1,5 @@
 # install
-pnpm install
+npm install
 
 # run
-pnpm run dev# personalColorAnalyzer
+npm run dev# personalColorAnalyzer
