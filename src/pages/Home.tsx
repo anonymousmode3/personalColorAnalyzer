@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
-import StickyLogo from "@/components/stickyLogo";
 import banner from "@/assets/mock-up-home-banner.png";
 import homeImage from "@/assets/mock-up-home-image.png";
 
 export default function Home() {
   return (
     <div className="relative -mt-20">
-      <StickyLogo />
       <div>
         <img src={banner} alt="banner" className="h-[638px] w-full" />
       </div>
@@ -14,7 +12,7 @@ export default function Home() {
       <div className="space-y-12 py-12">
         <div className="flex justify-center">
           <Link
-            to="/upload-image"
+            to="/upload"
             className="bg-[#8E1616] px-6 py-4 font-thin text-[28px] text-white rounded-full shadow-lg shadow-[#8E1616]/20"
           >
             Discover Your Personal Color
