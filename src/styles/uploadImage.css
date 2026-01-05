@@ -1,0 +1,19 @@
+
+
+.start-btn {
+  /* width: 100%; */
+  padding: 8px;
+  padding-inline: 20px;
+  border-radius: 999px;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+
+
+}
+
+.start-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}

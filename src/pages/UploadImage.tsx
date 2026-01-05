@@ -6,6 +6,10 @@ import { detectFace } from "@/lib/detectFace";
 import * as faceapi from "face-api.js";
 import { detectTone } from "@/lib/analysis/toneDetector";
 import type { ToneType } from "@/lib/analysis/tonePalettes";
+import ConsentModal from "@/components/consentModal";
+import CameraModal from '@/components/camera'
+import '@/styles/uploadImage.css'
+
 
 export default function UploadImage() {
   const [ready, setReady] = useState(false);
@@ -16,6 +20,9 @@ export default function UploadImage() {
   > | null>(null);
   const [tone, setTone] = useState<ToneType | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [open, setOpen] = useState(true)
+  const [openCamera, setOpenCamera] = useState(false)
+
 
   useEffect(() => {
     loadFaceModels().then(() => setReady(true));
@@ -58,6 +65,13 @@ export default function UploadImage() {
       <div className="text-4xl font-bold bg-red-800 text-white">
         TONE ==== {tone}
       </div>
+      <div className="flex justify-center">
+        <button className="start-btn bg-red-800" onClick={() => setOpenCamera(true)}>Start</button>
+         {openCamera && (
+        <CameraModal onClose={() => setOpenCamera(false)} />
+      )}
+        {open && <ConsentModal onClose={() => setOpen(false)} />}
+        </div>
     </div>
   );
 }
