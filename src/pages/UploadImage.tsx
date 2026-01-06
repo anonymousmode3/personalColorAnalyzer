@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ImageUpload from "@/components/imageUpload";
+import ImageUpload from "@/components/ImageUpload";
 import FaceCanvas from "@/components/faceCanvas";
 import { loadFaceModels } from "@/lib/faceApi";
 import { detectFace } from "@/lib/detectFace";
@@ -7,9 +7,8 @@ import * as faceapi from "face-api.js";
 import { detectTone } from "@/lib/analysis/toneDetector";
 import type { ToneType } from "@/lib/analysis/tonePalettes";
 import ConsentModal from "@/components/consentModal";
-import CameraModal from '@/components/camera'
-import '@/styles/uploadImage.css'
-
+import CameraModal from "@/components/camera";
+import "@/styles/uploadImage.css";
 
 export default function UploadImage() {
   const [ready, setReady] = useState(false);
@@ -20,9 +19,8 @@ export default function UploadImage() {
   > | null>(null);
   const [tone, setTone] = useState<ToneType | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [open, setOpen] = useState(true)
-  const [openCamera, setOpenCamera] = useState(false)
-
+  const [open, setOpen] = useState(true);
+  const [openCamera, setOpenCamera] = useState(false);
 
   useEffect(() => {
     loadFaceModels().then(() => setReady(true));
@@ -66,12 +64,15 @@ export default function UploadImage() {
         TONE ==== {tone}
       </div>
       <div className="flex justify-center">
-        <button className="start-btn bg-red-800" onClick={() => setOpenCamera(true)}>Start</button>
-         {openCamera && (
-        <CameraModal onClose={() => setOpenCamera(false)} />
-      )}
+        <button
+          className="start-btn bg-red-800"
+          onClick={() => setOpenCamera(true)}
+        >
+          Startหหหหหห
+        </button>
+        {openCamera && <CameraModal onClose={() => setOpenCamera(false)} />}
         {open && <ConsentModal onClose={() => setOpen(false)} />}
-        </div>
+      </div>
     </div>
   );
 }

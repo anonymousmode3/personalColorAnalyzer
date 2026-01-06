@@ -1,25 +1,27 @@
+import "@/styles/uploadImage.css";
 type Props = {
-  onImageLoad: (img: HTMLImageElement) => void;
-  disabled?: boolean;
+  value: File | null;
+  onSelect: (file: File) => void;
 };
 
-export default function ImageUpload({ onImageLoad, disabled }: Props) {
+export default function ImageUpload({ value, onSelect }: Props) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file) return;
-
-    const img = new Image();
-    img.src = URL.createObjectURL(file);
-    img.onload = () => onImageLoad(img);
+    if (file) onSelect(file);
   };
 
   return (
-    <input
-      type="file"
-      accept="image/*"
-      onChange={handleChange}
-      className="block w-full"
-      disabled={disabled}
-    />
+    <div>
+      <div className="border-2 border-dashed rounded-lg p-6 text-center">
+        <input type="file" accept="image/*" onChange={handleChange} />
+
+        {value && (
+          <img
+            src={URL.createObjectURL(value)}
+            className="mt-4 mx-auto max-h-64 rounded"
+          />
+        )}
+      </div>
+    </div>
   );
 }
