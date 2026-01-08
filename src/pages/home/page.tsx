@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import banner from "@/assets/mock-up-home-banner.png";
 import homeImage from "@/assets/mock-up-home-image.png";
 
+
 export default function Home() {
   return (
     <div className="relative -mt-20">
