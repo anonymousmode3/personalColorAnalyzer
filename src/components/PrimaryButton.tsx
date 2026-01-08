@@ -25,11 +25,8 @@ export default function PrimaryButton({
       onClick={onClick}
       disabled={isDisabled}
       className={clsx(
-        "mt-6 w-full rounded-lg px-6 py-3 text-white font-semibold transition-all",
-        "bg-blue-600 hover:bg-blue-700",
-        "focus:outline-none focus:ring-2 focus:ring-blue-400",
-        isDisabled &&
-          "bg-gray-400 cursor-not-allowed hover:bg-gray-400",
+        "py-3 p-6 rounded-full cursor-pointer text-center text-white bg-[#8E1616]",
+        isDisabled && "cursor-not-allowed text-[#7E7F83] bg-[#D7D7D9] ",
         className
       )}
     >
