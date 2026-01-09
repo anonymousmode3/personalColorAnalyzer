@@ -1,25 +1,75 @@
+import uploadImageIcon from "@/assets/icon/upload-image.svg";
+import { useRef } from "react";
+import { useState } from "react";
+import CameraModal from "./camera";
+import ConsentModal from "@/components/consentModal";
+import "@/styles/uploadImage.css";
+
 type Props = {
-  onImageLoad: (img: HTMLImageElement) => void;
-  disabled?: boolean;
+  value: File | null;
+  onSelect: (file: File) => void;
+  openCamera: boolean;
 };
 
-export default function ImageUpload({ onImageLoad, disabled }: Props) {
+export default function ImageUpload({ value, onSelect, openCamera }: Props) {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [openConsentModal, setOpenConsentModal] = useState(true);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file) return;
+    if (file) onSelect(file);
+  };
 
-    const img = new Image();
-    img.src = URL.createObjectURL(file);
-    img.onload = () => onImageLoad(img);
+  const handleClick = () => {
+    inputRef.current?.click();
   };
 
   return (
-    <input
-      type="file"
-      accept="image/*"
-      onChange={handleChange}
-      className="block w-full"
-      disabled={disabled}
-    />
+    <div className="text-center">
+      <button
+        onClick={handleClick}
+        className="py-2 px-4 rounded-full inline-flex items-center gap-2 cursor-pointer bg-white text-[#8E1616] border border-[#8E1616]"
+      >
+        <img src={uploadImageIcon} alt="uploadImageIcon" />
+        <span>Upload image</span>
+      </button>
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/*"
+        onChange={handleChange}
+        className="hidden"
+      />
+
+      <div className="flex justify-center">
+        <div className="m-5 min-w-325 bg-[url(@/assets/bg-upload-image.png)] bg-cover bg-center">
+          <div className="flex justify-center">
+            {value ? (
+              <>
+                <div className="flex justify-center">
+                  <div className="p-10">
+                    <div className="relative h-112.5 w-187.5 overflow-hidden rounded-lg bg-black">
+                      <img
+                        src={URL.createObjectURL(value)}
+                        className="h-full w-full object-cover"
+                        alt="preview"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="">
+                {openConsentModal ? (
+                  <ConsentModal onClose={() => setOpenConsentModal(false)} />
+                ) : (
+                  <CameraModal startCapture={openCamera} onCapture={onSelect} />
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
