@@ -42,13 +42,13 @@ export default function ImageUpload({ value, onSelect, openCamera }: Props) {
       />
 
       <div className="flex justify-center">
-        <div className="m-5 min-w-[1300px] bg-[url(@/assets/bg-upload-image.png)] bg-cover bg-center">
+        <div className="m-5 min-w-325 bg-[url(@/assets/bg-upload-image.png)] bg-cover bg-center">
           <div className="flex justify-center">
             {value ? (
               <>
                 <div className="flex justify-center">
                   <div className="p-10">
-                    <div className="relative h-[450px] w-[750px] overflow-hidden rounded-lg bg-black">
+                    <div className="relative h-112.5 w-187.5 overflow-hidden rounded-lg bg-black">
                       <img
                         src={URL.createObjectURL(value)}
                         className="h-full w-full object-cover"

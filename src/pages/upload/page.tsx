@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { useAnalyze } from "@/context/AnalyzeContext";
-import ImageUpload from "@/components/imageUpload";
+import { useAnalyze } from "@/context/useAnalyze";
+import ImageUpload from "@/components/ImageUpload";
 import ProgressStep from "@/components/ProgressStep";
 import PrimaryButton from "@/components/PrimaryButton";
 import { useNavigate } from "react-router-dom";
 import backIcon from "@/assets/icon/ep_back.svg";
+
 export default function UploadPage() {
   const { state, dispatch } = useAnalyze();
   const [startCamera, setStartCamera] = useState(false);
@@ -22,7 +23,7 @@ export default function UploadPage() {
   };
 
   return (
-    <div className="min-h-screen p-6 bg-[#FAFAFA]">
+    <div className="min-h-screen p-6">
       <div>
         <img
           src={backIcon}
