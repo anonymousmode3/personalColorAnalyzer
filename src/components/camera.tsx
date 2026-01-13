@@ -12,7 +12,6 @@ export default function CameraModal({ startCapture, onCapture }: Props) {
   const [countdown, setCountdown] = useState<number | null>(null);
   const [stream, setStream] = useState<MediaStream | null>(null);
 
-  // Start camera stream on mount
   useEffect(() => {
     (async () => {
       const mediaStream = await navigator.mediaDevices.getUserMedia({

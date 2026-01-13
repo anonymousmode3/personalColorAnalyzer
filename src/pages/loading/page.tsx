@@ -13,6 +13,10 @@ export default function LoadingPage() {
   }, [state.image]);
 
   useEffect(() => {
+    if (!state.image) {
+      navigate("/upload");
+    }
+
     const timer = setTimeout(() => {
       navigate("/result");
     }, 5000);
@@ -29,7 +33,7 @@ export default function LoadingPage() {
         <img
           src={imageUrl}
           alt="preview"
-          className="w-64 h-64 rounded-full object-cover mb-8"
+          className="w-64 h-64 rounded-full object-cover mb-8 opacity-60"
         />
       )}
 
