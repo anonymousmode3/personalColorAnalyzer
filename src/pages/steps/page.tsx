@@ -5,7 +5,7 @@ import PrimaryButton from "@/components/PrimaryButton";
 import ProgressStep from "@/components/ProgressStep";
 import OptionRow from "@/components/OptionRow";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import backIcon from "@/assets/icon/ep_back.svg";
 import { analyzeResult } from "@/lib/analyze";
 
@@ -19,8 +19,13 @@ export default function StepsPage() {
   const { state, dispatch } = useAnalyze();
   const navigate = useNavigate();
 
-  const [round, setRound] = useState<Round>(1);
+  useEffect(() => {
+    if (!state.image) {
+      navigate("/upload");
+    }
+  }, []);
 
+  const [round, setRound] = useState<Round>(1);
   const [step1, setStep1] = useState<Step1Value | null>(null);
   const [step2, setStep2] = useState<Step2Value | null>(null);
   const [step3, setStep3] = useState<Step3Value | null>(null);
@@ -55,7 +60,6 @@ export default function StepsPage() {
       return setRound(3);
     }
 
-    // FINAL ROUND
     dispatch({ type: "SET_STEP3", payload: step3! });
 
     const result = analyzeResult({
@@ -82,10 +86,10 @@ export default function StepsPage() {
       </div>
       <ProgressStep current={progressMap[round]} />
 
-      <h1 className="font-semibold mb-4 text-center text-5xl text-[#8E1616]">
+      <h1 className="font-semibold mb-4 text-center text-3xl md:text-5xl text-[#8E1616]">
         Which color do you think suits you best?
       </h1>
-      <div className="m-5 mt-10 min-h-150 bg-[url(@/assets/bg-upload-image.png)] bg-cover bg-center">
+      <div className="m-5 mt-10 md:bg-[url(@/assets/bg-upload-image.png)] bg-size-[800px] md:bg-size-[1300px] bg-no-repeat bg-center">
         {round === 1 && (
           <OptionRow
             previewImage={state.image}

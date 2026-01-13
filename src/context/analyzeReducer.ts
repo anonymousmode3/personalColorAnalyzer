@@ -17,7 +17,7 @@ export const initialState: AnalyzeState = {
 };
 
 export type Action =
-  | { type: "SET_IMAGE"; payload: File }
+  | { type: "SET_IMAGE"; payload: File | null }
   | { type: "SET_VEIN"; payload: VeinType }
   | { type: "SET_STEP1"; payload: Step1 }
   | { type: "SET_STEP2"; payload: Step2 }
@@ -26,11 +26,7 @@ export type Action =
   | { type: "SET_RESULT"; payload: string }
   | { type: "RESET" };
 
-
-export function reducer(
-  state: AnalyzeState,
-  action: Action
-): AnalyzeState {
+export function reducer(state: AnalyzeState, action: Action): AnalyzeState {
   switch (action.type) {
     case "SET_IMAGE":
       return { ...state, image: action.payload };
