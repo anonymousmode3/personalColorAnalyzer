@@ -14,6 +14,7 @@ type Props = {
 export default function ImageUpload({ value, onSelect, openCamera }: Props) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [openConsentModal, setOpenConsentModal] = useState(true);
+  // const [retakeTrigger, setRetakeTrigger] = useState(0);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -54,6 +55,16 @@ export default function ImageUpload({ value, onSelect, openCamera }: Props) {
                         className="h-full w-full object-cover"
                         alt="preview"
                       />
+                      {value && (
+                        <button
+                          onClick={() => {
+                            onSelect(null as any);
+                          }}
+                          className="z-100 absolute bottom-4 left-1/2 -translate-x-1/2 px-6 py-2 rounded-full  bg-white text-[#8E1616] border border-[#8E1616]"
+                        >
+                          Retake
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
