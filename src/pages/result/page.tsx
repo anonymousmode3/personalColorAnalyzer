@@ -4,15 +4,13 @@ import { useAnalyze } from "@/context/useAnalyze";
 import { useEffect } from "react";
 import summer from "@/assets/mock-up-result-summer.png";
 import { Link, useNavigate } from "react-router-dom";
-import { COLOR_SETS } from "@/type/colorSets";
+import { COLOR_SETS, isColorSetKey } from "@/type/colorSets";
 
 export default function ResultPage() {
   const { state } = useAnalyze();
   const navigate = useNavigate();
   const key = state.result?.toLowerCase();
-  const data = COLOR_SETS[key];
-
-  if (!data) return null;
+  const data = key && isColorSetKey(key) ? COLOR_SETS[key] : undefined;
 
   useEffect(() => {
     if (!state.image) {
@@ -27,6 +25,8 @@ export default function ResultPage() {
     step3: state.step3,
     finalResult: state.result,
   });
+
+  if (!data) return null;
 
   return (
     <div>

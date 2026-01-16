@@ -2,4 +2,4 @@
 npm install
 
 # run
-npm run dev# personalColorAnalyzer
+npm run dev #personalColorAnalyzer
