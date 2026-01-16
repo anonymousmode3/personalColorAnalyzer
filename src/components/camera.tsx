@@ -11,6 +11,7 @@ export default function CameraModal({ startCapture, onCapture }: Props) {
 
   const [countdown, setCountdown] = useState<number | null>(null);
   const [stream, setStream] = useState<MediaStream | null>(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -62,6 +63,9 @@ export default function CameraModal({ startCapture, onCapture }: Props) {
     ctx.scale(-1, 1);
     ctx.drawImage(video, 0, 0);
 
+    const dataUrl = canvas.toDataURL("image/jpeg");
+    setPreviewImage(dataUrl);
+
     canvas.toBlob((blob) => {
       if (!blob) return;
 
@@ -69,21 +73,23 @@ export default function CameraModal({ startCapture, onCapture }: Props) {
         type: "image/jpeg",
       });
 
-      stream?.getTracks().forEach((t) => t.stop());
       onCapture(file);
     }, "image/jpeg");
   };
 
   return (
     <div className="relative">
-      <video
-        ref={videoRef}
-        autoPlay
-        playsInline
-        className="object-cover rounded"
-      />
+      {!previewImage && (
+        <video
+          ref={videoRef}
+          autoPlay
+          playsInline
+          className="object-cover rounded w-full"
+          style={{ transform: "scaleX(-1)" }}
+        />
+      )}
 
-      {countdown !== null && (
+      {countdown !== null && !previewImage && (
         <div className="absolute inset-0 flex items-center justify-center text-white text-6xl font-bold bg-black/40">
           {countdown}
         </div>
