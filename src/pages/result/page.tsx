@@ -2,13 +2,17 @@
 
 import { useAnalyze } from "@/context/useAnalyze";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import summer from "@/assets/mock-up-result-summer.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { COLOR_SETS } from "@/type/colorSets";
 
 export default function ResultPage() {
   const { state } = useAnalyze();
   const navigate = useNavigate();
+  const key = state.result?.toLowerCase();
+  const data = COLOR_SETS[key];
+
+  if (!data) return null;
 
   useEffect(() => {
     if (!state.image) {
@@ -23,25 +27,6 @@ export default function ResultPage() {
     step3: state.step3,
     finalResult: state.result,
   });
-  const colors = [
-    "#FF6FAF",
-    "#B85ACB",
-    "#6C6EDB",
-    "#12A6D9",
-    "#0A8CFF",
-
-    "#F6B9C8",
-    "#F9B5AC",
-    "#FFF59D",
-    "#AEEAD8",
-    "#BFC8FF",
-
-    "#D7BFC4",
-    "#E3C8C6",
-    "#E7DFB7",
-    "#BFD9DD",
-    "#AEB4C8",
-  ];
 
   return (
     <div>
@@ -82,7 +67,7 @@ export default function ResultPage() {
         <p className="text-xl md:text-3xl mb-6">your personal color</p>
 
         <Link
-          to="/upload"
+          to="/shopping"
           className="bg-[#8E1616] px-6 py-3 md:px-10 md:py-4 text-white rounded-full text-lg md:text-2xl shadow-lg shadow-[#8E1616]/20 inline-block"
         >
           Discover your matches
@@ -93,9 +78,9 @@ export default function ResultPage() {
         Recommended colors
       </div>
 
-      <div className="max-w-4xl mx-auto justify-center mt-10 rounded-2xl p-6  shadow-sm bg-white">
+      <div className="max-w-3xl mx-auto justify-center mt-10 rounded-2xl p-6  shadow-sm bg-white">
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6">
-          {colors.map((c, i) => (
+          {data.recommended.map((c: string, i: number) => (
             <div
               key={i}
               className="w-full aspect-square rounded-xl"
@@ -104,21 +89,21 @@ export default function ResultPage() {
           ))}
         </div>
       </div>
-      <div className="w-full max-w-5xl mx-auto space-y-10">
+      <div className="w-full max-w-6xl mx-auto space-y-10 mt-10">
         {/* ---------- SECTION 1 ---------- */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {/* Make up */}
-          <div className="text-center">
+          <div className="text-center md:pl-20">
             <h3 className="text-[#8E1616] font-semibold text-xl mb-3">
               Make up
             </h3>
 
             <div className="bg-white rounded-2xl p-6 shadow-sm inline-block">
               <div className="grid grid-cols-2 gap-4">
-                {["#F8C9CC", "#F69BC0", "#E7B6F3", "#D3426F"].map((c, i) => (
+                {data.makeup.map((c: string, i: number) => (
                   <div
                     key={i}
-                    className="w-20 h-20 rounded-xl"
+                    className="w-25 h-25 rounded-xl"
                     style={{ backgroundColor: c }}
                   />
                 ))}
@@ -132,7 +117,7 @@ export default function ResultPage() {
               Accessories
             </h3>
 
-            <div className="bg-white/60 rounded-2xl p-6 shadow-sm border-dashed border-2 border-gray-300 h-[160px] flex items-center justify-center">
+            <div className="bg-white rounded-2xl p-6 shadow-sm inline-block">
               <span className="text-gray-400">Coming soon</span>
             </div>
           </div>
@@ -144,26 +129,26 @@ export default function ResultPage() {
             Color of good fortune
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            {/* Career luck */}
+          {/* <div className="grid grid-cols-1 md:grid-cols-3 md:gap-20 text-center md:px-45">
+   
             <div>
               <p className="font-medium mb-2">Career luck</p>
 
-              <div className="rounded-2xl overflow-hidden shadow-sm">
+              <div className="overflow-hidden shadow-sm">
                 <div
-                  className="h-20 flex items-center px-3 text-white"
+                  className="h-40 flex items-start p-3 text-white"
                   style={{ background: "#0BA4DB" }}
                 >
                   Blue
                 </div>
                 <div
-                  className="h-20 flex items-center px-3 text-gray-700"
+                  className="h-40 flex items-start p-3 text-white"
                   style={{ background: "#E3E6EB" }}
                 >
                   Grey
                 </div>
                 <div
-                  className="h-20 flex items-center px-3 text-white"
+                  className="h-40 flex items-start p-3 text-white"
                   style={{ background: "#071D49" }}
                 >
                   Navy
@@ -171,19 +156,19 @@ export default function ResultPage() {
               </div>
             </div>
 
-            {/* Love luck */}
+  
             <div>
               <p className="font-medium mb-2">Love luck</p>
 
-              <div className="rounded-2xl overflow-hidden shadow-sm">
+              <div className="overflow-hidden shadow-sm">
                 <div
-                  className="h-20 flex items-center px-3 text-gray-700"
+                  className="h-40 flex items-start p-3 text-white"
                   style={{ background: "#FFC3BD" }}
                 >
                   Pink
                 </div>
                 <div
-                  className="h-20 flex items-center px-3 text-white"
+                  className="h-40 flex items-start p-3 text-white"
                   style={{ background: "#BFC5FF" }}
                 >
                   Purple
@@ -191,25 +176,46 @@ export default function ResultPage() {
               </div>
             </div>
 
-            {/* Wealth luck */}
+           
             <div>
               <p className="font-medium mb-2">Wealth luck</p>
 
-              <div className="rounded-2xl overflow-hidden shadow-sm">
+              <div className="overflow-hidden shadow-sm">
                 <div
-                  className="h-20 flex items-center px-3 text-gray-700"
+                  className="h-40 flex items-start p-3 text-white"
                   style={{ background: "#B8EAD6" }}
                 >
                   Green
                 </div>
                 <div
-                  className="h-20 flex items-center px-3 text-white"
+                  className="h-40 flex items-start p-3 text-white"
                   style={{ background: "#AEB3C2" }}
                 >
                   Grey
                 </div>
               </div>
             </div>
+          </div> */}
+          <div className="grid grid-cols-1 md:grid-cols-3 md:gap-20 text-center md:px-45 mb-10">
+            {Object.entries(data.fortune).map(([type, colors]) => (
+              <div key={type}>
+                <p className="capitalize font-medium mb-2">{type} luck</p>
+
+                <div className="rounded-lg overflow-hidden shadow-sm">
+                  {colors.map(
+                    (c: { name: string; color: string }, i: number) => (
+                      <div
+                        key={i}
+                        className="h-40 flex items-start p-3 text-white"
+                        style={{ backgroundColor: c.color }}
+                      >
+                        {c.name}
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
