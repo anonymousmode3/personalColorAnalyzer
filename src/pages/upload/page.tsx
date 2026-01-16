@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useAnalyze } from "@/context/useAnalyze";
-import ImageUpload from "@/components/ImageUpload";
+import ImageUpload from "@/components/imageUpload";
 import ProgressStep from "@/components/ProgressStep";
 import PrimaryButton from "@/components/PrimaryButton";
 import { useNavigate } from "react-router-dom";
