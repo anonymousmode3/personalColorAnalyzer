@@ -112,6 +112,7 @@ export const COLOR_SETS = {
       ],
     },
   },
+
   winter: {
     recommended: [
       "#FAF07E",
@@ -150,3 +151,7 @@ export const COLOR_SETS = {
     },
   },
 };
+
+export function isColorSetKey(key: string): key is keyof typeof COLOR_SETS {
+  return key in COLOR_SETS;
+}
