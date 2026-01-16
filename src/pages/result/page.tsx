@@ -67,7 +67,7 @@ export default function ResultPage() {
         <p className="text-xl md:text-3xl mb-6">your personal color</p>
 
         <Link
-          to="/upload"
+          to="/shopping"
           className="bg-[#8E1616] px-6 py-3 md:px-10 md:py-4 text-white rounded-full text-lg md:text-2xl shadow-lg shadow-[#8E1616]/20 inline-block"
         >
           Discover your matches
@@ -201,7 +201,7 @@ export default function ResultPage() {
               <div key={type}>
                 <p className="capitalize font-medium mb-2">{type} luck</p>
 
-                <div className="rounded-2xl overflow-hidden shadow-sm">
+                <div className="rounded-lg overflow-hidden shadow-sm">
                   {colors.map(
                     (c: { name: string; color: string }, i: number) => (
                       <div
