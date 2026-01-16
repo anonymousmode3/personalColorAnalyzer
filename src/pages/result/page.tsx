@@ -32,17 +32,7 @@ export default function ResultPage() {
     <div>
       <div className="w-full  mx-auto relative">
         <img src={summer} alt="summer" className="w-full h-auto rounded-lg" />
-        <div
-          className="absolute 
-      inset-0 
-      flex 
-      flex-col 
-      justify-center 
-      pl-6 
-      md:pl-24 
-      text-left
-      text-white "
-        >
+        <div className="absolute inset-0 flex flex-col justify-center pl-6 md:pl-24 text-left text-white ">
           <p className="text-white text-lg md:text-2xl drop-shadow">
             Your personal color is
           </p>
