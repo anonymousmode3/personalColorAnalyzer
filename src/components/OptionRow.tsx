@@ -38,7 +38,7 @@ export default function OptionRow<T extends OptionValue>({
                 style={{ backgroundColor: opt.bgColor }}
               >
                 {imageUrl && (
-                  <div className="w-48 h-48 rounded-full overflow-hidden bg-white shadow-lg">
+                  <div className="w-64 h-64 rounded-full overflow-hidden bg-white shadow-lg">
                     <img
                       src={imageUrl}
                       alt="preview"

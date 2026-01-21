@@ -1,30 +1,49 @@
 import { Link } from "react-router-dom";
-import banner from "@/assets/mock-up-home-banner.png";
-import homeImage from "@/assets/mock-up-home-image.png";
-
+import banner from "@/assets/home-banner.png";
+import autumnImage from "@/assets/home-autumn-tone-banner.png";
+import springImage from "@/assets/home-spring-tone-banner.png";
+import summerImage from "@/assets/home-summer-tone-banner.png";
+import winterImage from "@/assets/home-winter-tone-banner.png";
+import { useAnalyze } from "@/context/useAnalyze";
+import logo from "@/assets/full-logo.png";
 
 export default function Home() {
+  const { dispatch } = useAnalyze();
+
   return (
-    <div className="relative -mt-20">
-      <div>
-        <img src={banner} alt="banner" className="h-[638px] w-full" />
+    <div className="pb-20">
+      <div className="relative w-full h-79.75 md:h-full">
+        <img
+          src={banner}
+          alt="banner"
+          className="w-full h-full object-cover md:object-fill"
+        />
+
+        <img
+          src={logo}
+          alt="logo"
+          className="absolute top-4 left-1/2 -translate-x-1/2 w-40 h-8 md:w-60 md:h-13 z-10"
+        />
       </div>
 
       <div className="space-y-12 py-12">
-        <div className="flex justify-center">
+        <div
+          className="flex justify-center"
+          onClick={() => dispatch({ type: "SET_IMAGE", payload: null })}
+        >
           <Link
             to="/upload"
-            className="bg-[#8E1616] px-6 py-4 font-thin text-[28px] text-white rounded-full shadow-lg shadow-[#8E1616]/20"
+            className="bg-[#8E1616] px-6 py-4 font-thin text-[18px] md:text-[28px] text-white rounded-full shadow-lg shadow-[#8E1616]/20"
           >
             Discover Your Personal Color
           </Link>
         </div>
-        <div className="text-[40px] text-center font-bold text-[#8E1616]">
+        <div className="text-[28px] md:text-[40px] text-center font-bold text-[#8E1616]">
           What is Personal Color ?
         </div>
 
         <div className="flex justify-center">
-          <div className="text-center w-3xl text-[28px]">
+          <div className="text-center w-3xl md:text-[28px] px-4">
             Colors that match our skin tone will make shadows on the face appear
             less noticeable, reducing the appearance of wrinkles, laugh lines,
             and under-eye circles. This makes the face look brighter and
@@ -35,12 +54,19 @@ export default function Home() {
 
         <div className="space-y-6">
           <div className="flex justify-center">
-            <img src={homeImage} alt="homeImage" className="max-w-[796px]" />
+            <img
+              src={springImage}
+              alt="homeImage"
+              className="md:max-w-199 px-2"
+            />
           </div>
-          <div className="flex justify-center">
+          <div
+            className="flex justify-center"
+            onClick={() => dispatch({ type: "SET_RESULT", payload: "Spring" })}
+          >
             <Link
-              to="/upload-image"
-              className="border border-[#8E1616] px-6 py-2 font-light text-2xl text-[#8E1616] rounded-full shadow-lg shadow-black/10"
+              to="/result"
+              className="border border-[#8E1616] px-6 py-2 font-light text-md md:text-2xl text-[#8E1616] rounded-full shadow-lg shadow-black/10"
             >
               View Spring tone
             </Link>
@@ -49,12 +75,19 @@ export default function Home() {
 
         <div className="space-y-6">
           <div className="flex justify-center">
-            <img src={homeImage} alt="homeImage" className="max-w-[796px]" />
+            <img
+              src={summerImage}
+              alt="homeImage"
+              className="md:max-w-199 px-2"
+            />
           </div>
-          <div className="flex justify-center">
+          <div
+            className="flex justify-center"
+            onClick={() => dispatch({ type: "SET_RESULT", payload: "Summer" })}
+          >
             <Link
-              to="/upload-image"
-              className="border border-[#8E1616] px-6 py-2 font-light text-2xl text-[#8E1616] rounded-full shadow-lg shadow-black/10"
+              to="/result"
+              className="border border-[#8E1616] px-6 py-2 font-light text-md md:text-2xl text-[#8E1616] rounded-full shadow-lg shadow-black/10"
             >
               View Summer tone
             </Link>
@@ -63,14 +96,42 @@ export default function Home() {
 
         <div className="space-y-6">
           <div className="flex justify-center">
-            <img src={homeImage} alt="homeImage" className="max-w-[796px]" />
+            <img
+              src={autumnImage}
+              alt="homeImage"
+              className="md:max-w-199 px-2"
+            />
           </div>
-          <div className="flex justify-center">
+          <div
+            className="flex justify-center"
+            onClick={() => dispatch({ type: "SET_RESULT", payload: "Autumn" })}
+          >
             <Link
-              to="/upload-image"
-              className="border border-[#8E1616] px-6 py-2 font-light text-2xl text-[#8E1616] rounded-full shadow-lg shadow-black/10"
+              to="/result"
+              className="border border-[#8E1616] px-6 py-2 font-light text-md md:text-2xl text-[#8E1616] rounded-full shadow-lg shadow-black/10"
             >
               View Autumn tone
+            </Link>
+          </div>
+        </div>
+
+        <div className="space-y-6">
+          <div className="flex justify-center">
+            <img
+              src={winterImage}
+              alt="homeImage"
+              className="md:max-w-199 px-2"
+            />
+          </div>
+          <div
+            className="flex justify-center"
+            onClick={() => dispatch({ type: "SET_RESULT", payload: "Winter" })}
+          >
+            <Link
+              to="/result"
+              className="border border-[#8E1616] px-6 py-2 font-light text-md md:text-2xl text-[#8E1616] rounded-full shadow-lg shadow-black/10"
+            >
+              View Winter tone
             </Link>
           </div>
         </div>

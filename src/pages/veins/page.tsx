@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import backIcon from "@/assets/icon/ep_back.svg";
 import clsx from "clsx";
 import { useEffect } from "react";
+import veinCoolTone from "@/assets/veins-cool-tone.png";
+import veinWarmTone from "@/assets/veins-warm-tone.png";
 
 export default function VeinsPage() {
   const { state, dispatch } = useAnalyze();
@@ -18,13 +20,13 @@ export default function VeinsPage() {
   };
 
   useEffect(() => {
-    if(!state.image){
-      navigate("/upload")
+    if (!state.image) {
+      navigate("/upload");
     }
   }, []);
 
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen p-6 pb-20">
       <div>
         <img
           src={backIcon}
@@ -47,21 +49,25 @@ export default function VeinsPage() {
             className="grid gap-y-6 text-center"
             onClick={() => selectVein("cool")}
           >
-            <div
+            <img
+              src={veinCoolTone}
+              alt="homeImage"
               className={clsx(
-                "cursor-pointer rounded-2xl bg-gray-300 w-75 h-100 md:w-[384px] md:h-127.5 shadow-xl border border-[#7E7F83]",
-                state.vein === "cool" && "border-2 border-[#8E1616]"
+                "cursor-pointer rounded-3xl w-75 h-100 md:w-[384px] md:h-127.5 shadow-xl border border-[#7E7F83]",
+                state.vein === "cool" && "border-2 border-[#8E1616]",
               )}
-            ></div>
+            />
             <div className="text-[28px] text-center">Cool</div>
           </div>
           <div className="grid gap-y-6" onClick={() => selectVein("warm")}>
-            <div
+            <img
+              src={veinWarmTone}
+              alt="homeImage"
               className={clsx(
-                "cursor-pointer rounded-2xl bg-gray-300 w-75 h-100 md:w-[384px] md:h-127.5 shadow-xl border border-[#7E7F83]",
-                state.vein === "warm" && "border-2 border-[#8E1616]"
+                "cursor-pointer rounded-3xl w-75 h-100 md:w-[384px] md:h-127.5 shadow-xl border border-[#7E7F83]",
+                state.vein === "warm" && "border-2 border-[#8E1616]",
               )}
-            ></div>
+            />
             <div className="text-[28px] text-center">Warm</div>
           </div>
         </div>
