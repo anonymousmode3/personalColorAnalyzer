@@ -33,15 +33,14 @@ export default function OptionRow<T extends OptionValue>({
                 onClick={() => onSelect(opt.value)}
                 className={clsx(
                   "cursor-pointer rounded-2xl w-75 h-100 md:w-[384px] md:h-127.5 flex items-center justify-center shadow-xl transition-all border",
-                  selected ? "border-2 border-[#8E1616]" : "border-[#7E7F83]"
+                  selected ? "border-2 border-[#8E1616]" : "border-[#7E7F83]",
                 )}
                 style={{ backgroundColor: opt.bgColor }}
               >
                 {imageUrl && (
-                  <div className="w-64 h-64 rounded-full overflow-hidden bg-white shadow-lg">
+                  <div className="w-60 h-80 md:w-70 md:h-90 overflow-hidden bg-white shadow-lg [clip-path:ellipse(50%_50%_at_50%_50%)]">
                     <img
                       src={imageUrl}
-                      alt="preview"
                       className="w-full h-full object-cover"
                     />
                   </div>

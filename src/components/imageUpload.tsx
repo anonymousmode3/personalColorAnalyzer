@@ -53,7 +53,7 @@ export default function ImageUpload({
       />
 
       <div className="flex justify-center">
-        <div className="m-5 min-w-325 bg-[url(@/assets/bg-upload-image.png)] bg-cover bg-center">
+        <div className="m-5 min-w-full md:min-w-325 bg-[url(@/assets/bg-upload-image.png)] bg-size-[800px] md:bg-size-[1300px] bg-no-repeat bg-center">
           <div className="flex justify-center">
             {value ? (
               <>
@@ -98,7 +98,7 @@ export default function ImageUpload({
                       {value && (
                         <button
                           onClick={() => {
-                            onSelect(null as any);
+                            onSelect(null as never);
                           }}
                           className="z-100 absolute bottom-4 left-1/2 -translate-x-1/2 px-6 py-2 rounded-full  bg-white text-[#8E1616] border border-[#8E1616]"
                         >
