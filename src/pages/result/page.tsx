@@ -102,7 +102,7 @@ export default function ResultPage() {
             <img
               src={logo}
               alt="logo"
-              className="absolute top-4 left-1/2 -translate-x-1/2 w-10 h-8 md:w-32 md:h-24 z-10"
+              className="absolute top-4 left-1/2 -translate-x-1/2 w-10 h-8 md:w-28 md:h-20 z-10"
             />
           </Link>
         </div>
