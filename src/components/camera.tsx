@@ -84,13 +84,15 @@ export default function CameraModal({ startCapture, onCapture }: Props) {
           ref={videoRef}
           autoPlay
           playsInline
-          className="object-cover rounded w-full"
+          className="object-cover rounded-2xl w-full"
           style={{ transform: "scaleX(-1)" }}
         />
       )}
 
+      <div className="pointer-events-none absolute inset-0 rounded-2xl border-1 border-black" />
+
       {countdown !== null && !previewImage && (
-        <div className="absolute inset-0 flex items-center justify-center text-white text-6xl font-bold bg-black/40">
+        <div className="absolute inset-0 flex items-center justify-center text-white text-6xl font-bold bg-black/40 rounded-2xl">
           {countdown}
         </div>
       )}
