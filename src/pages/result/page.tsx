@@ -172,7 +172,7 @@ export default function ResultPage() {
             </h3>
 
             <div className="bg-white rounded-2xl p-6 shadow-sm h-full flex items-center justify-center">
-              <div className="grid grid-cols-2 gap-6 md:gap-12 p-2 md:p-8 h-full">
+              <div className="grid grid-cols-2 gap-6 md:gap-12 p-2 md:p-8 h-full min-h-80 md:h-full">
                 {data.makeup.map((c: string, i: number) => (
                   <div
                     key={i}
@@ -202,7 +202,7 @@ export default function ResultPage() {
                         : springAccsessories
                 }
                 alt="Accessories"
-                className="w-full h-140 shadow-sm rounded-3xl"
+                className="w-full md:h-140 shadow-sm rounded-3xl"
               />
             </div>
           </div>
