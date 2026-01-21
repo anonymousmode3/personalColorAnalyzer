@@ -106,15 +106,6 @@ export default function ResultPage() {
             />
           </Link>
         </div>
-        <div className="absolute inset-0 flex flex-col justify-center pl-6 md:pl-60 text-left text-white ">
-          <p className="text-white text-lg md:text-2xl drop-shadow">
-            Your personal color is
-          </p>
-
-          <h1 className="text-white text-4xl md:text-6xl font-bold drop-shadow-lg mt-2">
-            {state.result || "Summer"}
-          </h1>
-        </div>
       </div>
 
       <div className="max-w-4xl mx-auto mt-6 md:mt-10 text-center text-sm md:text-lg leading-relaxed px-2 md:px-0">
